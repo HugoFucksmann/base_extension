@@ -1,0 +1,56 @@
+{
+  "name": "vscode-extension",
+  "displayName": "VSCode Extension Example",
+  "description": "Ejemplo de extensión de VS Code con icono en Activity Bar.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": ">=1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.sayHello"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.sayHello",
+        "title": "Hello World"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "exampleActivityBar",
+          "title": "Ejemplo",
+          "icon": "media/activity-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "exampleActivityBar": [
+        {
+          "id": "exampleView",
+          "name": "Vista Ejemplo"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "esbuild src/extension.ts --bundle --platform=node --outfile=out/extension.js --format=cjs --external:vscode",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.25.6",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
